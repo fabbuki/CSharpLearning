@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Fibonacci
 {
-	class Iterative
+	class Recursive
 	{
 		static void Main ()
 		{
@@ -23,20 +23,20 @@ namespace Fibonacci
 
 			position = Convert.ToInt32 (line); 
 
-			Stopwatch stopWatch = new Stopwatch();
-			stopWatch.Start();
+			Stopwatch stopWatch = new Stopwatch ();
+			stopWatch.Start ();
 
-			fibby = IterativeFib (position); 
+			fibby = RecursiveFib (position); 
 
 			//stop the clock 
-			stopWatch.Stop();
+			stopWatch.Stop ();
 			//TimeSpan ts = stopWatch.Elapsed;
 
-			Console.WriteLine("The Fibonacci at position {0} is {1}", position, fibby); 
+			Console.WriteLine ("The Fibonacci at position {0} is {1}", position, fibby); 
 
 			// Format and display the TimeSpan value. 
 			// Write result
-			Console.WriteLine("Time elapsed: {0}",
+			Console.WriteLine ("Time elapsed: {0}",
 				stopWatch.Elapsed);
 
 
@@ -49,18 +49,21 @@ namespace Fibonacci
 		static decimal IterativeFib (int position)
 		{
 
-			decimal Fib1 = 1;  
+			decimal Fib1 = 0;  
 			decimal Fib2 = 1;  
 			decimal myFib = 0; 
 
-			if (position <= 2) {
-
+			if (position == 0) {
+				myFib = 0; 
+				return myFib; 
+			}
+			else if (position == 1) {
 				myFib = 1; 
 				return myFib; 
 
 			} else {
 
-				for (int i = 3; i <= position; i++) {
+				for (int i = 2; i <= position; i++) {
 			
 					myFib = Fib1 + Fib2; 
 
@@ -72,6 +75,27 @@ namespace Fibonacci
 
 			}
 
+		}
+
+		static decimal RecursiveFib (int position)
+		{
+
+			decimal myFib = 0; 
+
+			if (position == 0) {
+				myFib = 0; 
+				return myFib; 
+			}
+			else if (position == 1) {
+				myFib = 1; 
+				return myFib; 
+			}
+			 else {
+
+				myFib = RecursiveFib (position - 1) + RecursiveFib (position - 2); 
+			}
+
+			return myFib; 
 		}
 	}
 }
